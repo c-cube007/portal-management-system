@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
+    <!-- My CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <title>My Dashboard</title>
+</head>
+
+<body>
+
+
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <a href="#" class="brand">
+            <i class='bx bxs-smile'></i>
+            <span class="text">OptiAcad</span>
+        </a>
+        <ul class="side-menu top">
+            <li class="active">
+                <a href="#dashboard_section">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#products_section">
+                    <i class='bx bxs-shopping-bag-alt'></i>
+                    <span class="text">Products</span>
+                </a>
+            </li>
+             <li>
+                <a href="orders.html" target = "_blank">
+                    <i class='bx bxs-cart'></i>
+                    <span class="text">Orders</span>
+                </a>
+            </li>
+             <li>
+                <a href="#">
+                    <i class='bx bxs-user'></i>
+                    <span class="text">Customers</span>
+                </a>
+            </li>
+            <li>
+                <a href="#analytics_section">
+                    <i class='bx bxs-doughnut-chart'></i>
+                    <span class="text">Analytics</span>
+                </a>
+            </li>
+            <li>
+                <a href="#tutorial_manual">
+                    <i class='bx bxs-message-dots'></i>
+                    <span class="text">Marketing Materials</span>
+                </a>
+            </li>
+            <li>
+                <a href="#myNetwork">
+                    <i class='bx bxs-group'></i>
+                    <span class="text">My Network</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="side-menu">
+            <li>
+                <a href="settings.html" target="_blank">
+                    <i class='bx bxs-cog'></i>
+                    <span class="text">Settings</span>
+                </a>
+            </li>
+            <li>
+                <a href="C:\Users\Collins Chiekwe\Downloads\adminhub-master\login.html" class="logout">
+                    <i class='bx bxs-log-out-circle'></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- SIDEBAR -->
+
+
+
+    <!-- CONTENT -->
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <i class='bx bx-menu'></i>
+            <a href="#" class="nav-link">Menu</a>
+            <form action="#">
+                <div class="form-input">
+                    <input type="search" placeholder="Search...">
+                    <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+                </div>
+            </form>
+            <input type="checkbox" id="switch-mode" hidden>
+            <label for="switch-mode" class="switch-mode"></label>
+            <a href="#" class="notification">
+                <i class='bx bxs-bell'></i>
+                <span class="num">8</span>
+            </a>
+            <a href="C:\Users\Collins Chiekwe\Downloads\adminhub-master\profile.html" class="profile" target="_blank">
+                <img src="C:\Users\Collins Chiekwe\Downloads\adminhub-master\assets\img\IMG_7119.jpg">
+            </a>
+        </nav>
+        <!-- NAVBAR -->
+
+        <!-- MAIN -->
+        <main>
+            <div class="head-title">
+                <div class="left" id="dashboard_section">
+                    <h1>Dashboard</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="C:\Users\Collins Chiekwe\Downloads\adminhub-master\adminhub-master\dashboard.html">Dashboard</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li>
+                            <a class="active" href="#">Home</a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="#" class="btn-download">
+                    <i class='bx bxs-cloud-download'></i>
+
+                    <span class="text" id="copyButton">Referral Link</span>
+                    <p><span id="referralLink"></span>
+                    </p>
+                </a>
+                <div id="copyMessage">
+                </div>
+            </div>
+
+            <ul class="box-info">
+                <li>
+                    <i class='bx bxs-calendar-check'></i>
+                    <span class="text">
+						<h3>1020</h3>
+						<p>My Orders</p>
+					</span>
+                </li>
+                <li>
+                    <i class='bx bxs-group'></i>
+                    <span class="text">
+						<h3>24</h3>
+						<p>Clients</p>
+					</span>
+                </li>
+                <li>
+                    <i class='bx bxs-dollar-circle'></i>
+                    <span class="text">
+						<h3>$2543</h3>
+						<p>Total Commission</p>
+					</span>
+                </li>
+            </ul>
+
+
+            <div class="table-data">
+                <div class="order">
+                    <div class="head">
+                        <h3>Recent Orders</h3>
+                        <i class='bx bx-search'></i>
+                        <i class='bx bx-filter'></i>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Date Order</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <img src="img/people.png">
+                                    <p>John Doe</p>
+                                </td>
+                                <td>01-10-2021</td>
+                                <td><span class="status completed">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="img/people.png">
+                                    <p>John Doe</p>
+                                </td>
+                                <td>01-10-2021</td>
+                                <td><span class="status pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="img/people.png">
+                                    <p>John Doe</p>
+                                </td>
+                                <td>01-10-2021</td>
+                                <td><span class="status process">Process</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="img/people.png">
+                                    <p>John Doe</p>
+                                </td>
+                                <td>01-10-2021</td>
+                                <td><span class="status pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="img/people.png">
+                                    <p>John Doe</p>
+                                </td>
+                                <td>01-10-2021</td>
+                                <td><span class="status completed">Completed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+            <!-- Your dashboard content goes here -->
+             <section class="offers-section">
+        <h2>Exciting Offers</h2>
+
+        <!-- Offer 1 -->
+        <div class="offer">
+            <h3>Special Discount</h3>
+            <p>Get 20% off on selected items. Limited time offer!</p>
+        </div>
+
+        <!-- Offer 2 -->
+        <div class="offer">
+            <h3>Buy One, Get One Free</h3>
+            <p>Buy any product and get another one for free. Hurry!</p>
+        </div>
+
+        <!-- Add more offers as needed -->
+    </section>
+             <div class="head" id="products_section">
+                <h3>Products</h3>          
+            </div>
+            <div class="product-section">
+            
+            <!-- Product 1 -->
+            <div class="product-card">
+            <img class="product-image" src="img/product-1.jpg" alt="Product 1">
+            <h3>Smart Bulb CCTV Camera</h3>
+            <p>Smart Bulb CCTV.</p>
+            <a href = "https://optismart.com.ng/bulb-camera/" target="_blank" class="view-details-btn">View Details</a>
+            <a href = "https://optismart.com.ng/bulb-camera/" target="_blank" class="view-details-btn">Add to Cart</a>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+            <img class="product-image" src="img/product-2.jpg" alt="Product 2">
+            <h3>4G PTZ Solar Camera</h3>
+            <p>4G PTZ</p>
+            <a href="https://optismart.com.ng/4g-solar-ptz-camera/" target="_blank" class="view-details-btn">View Details</a>
+            </div>
+
+            <div class="product-card">
+            <img class="product-image" src="img/product-3.jpg" alt="Product 2">
+            <h3>Smart Indoor CCTV Camera</h3>
+            <p>Smart Indoor Camera</p>
+           <a href="https://optismart.com.ng/smart-indoor-cctv-camera/" target="_blank" class="view-details-btn">View Details</a>
+            </div>
+
+            <div class="product-card">
+            <img class="product-image" src="img/product-4.jpg" alt="Product 2">
+            <h3>Solar Wireless Camera</h3>
+            <p>Solar Wireless</p>
+            <a href="https://optismart.com.ng/solar-wireless-rechargeable-camera/" class="view-details-btn">View Details</a>
+            </div>
+
+        <!-- Add more product cards as needed -->
+            </div>
+            <div class="head" id="analytics_section">
+                <h3>Analytics</h3>          
+            </div>
+            <a></a>
+            <canvas id="myChart" width="400" height="200"></canvas>
+            <div class="head" id="tutorial_manual">
+                <h3>Manual-Guide</h3>          
+            </div>
+            <div class="document-section">
+                
+                <a href="tutorial1.pdf" class="document-link">
+                    <img class="document-thumbnail" src="img/thumbnail-1.jpg" alt="PDF Thumbnail">
+                    Tutorial 1 - Getting Started (PDF)
+                </a>
+
+                <!-- Video Document with Thumbnail -->
+                <a href="tutorial-video.mp4" class="document-link">
+                    <img class="document-thumbnail" src="img/thumbnail-1.jpg" alt="Video Thumbnail">
+                    Tutorial Video - Advanced Features
+                </a>
+                <a href="tutorial1.pdf" class="document-link">
+                    <img class="document-thumbnail" src="img/thumbnail-1.jpg" alt="PDF Thumbnail">
+                    Tutorial 1 - Getting Started (PDF)
+                </a>
+
+                <!-- Video Document with Thumbnail -->
+                <a href="tutorial-video.mp4" class="document-link">
+                    <img class="document-thumbnail" src="img/thumbnail-1.jpg" alt="Video Thumbnail">
+                    Tutorial Video - Advanced Features
+                </a>
+            </div>
+            <div class="network-section">
+                <h2>Your Network</h2>
+                <ul class="network-list" id="networkList">
+                    <!-- Network items will be dynamically added here using JavaScript -->
+                </ul>
+            </div>
+
+        </main>
+
+
+        <!-- MAIN -->
+    </section>
+    <!-- CONTENT -->
+    <script>
+        document.getElementById('copyButton').addEventListener('click', function() {
+            // Select the text within the span
+            const referralLink = document.getElementById('referralLink');
+            const textToCopy = referralLink.textContent;
+            const textArea = document.createElement('textarea');
+            textArea.value = textToCopy;
+            document.body.appendChild(textArea);
+
+            // Copy the text to the clipboard
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+
+            // Display the "Link copied" message
+            const copyMessage = document.getElementById('copyMessage');
+            copyMessage.textContent = 'Link copied!';
+        });
+    </script>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="dashboard.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+</html>

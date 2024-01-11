@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/boxicons/2.0.7/css/boxicons.min.css">
+    <style>
+        /* Your existing styles */
+        body {
+                background-color: #f8f8f8; /* Off-white color, adjust as needed */
+            }
+        header {
+                text-align: center;
+                color: #ffd700; /* Yellow color */
+                padding: 10px; /* Adjust padding as needed */
+                border-radius: 8px;
+                margin-bottom: 20px; /* Add margin to separate header from the form */
+                }
+
+        h1 {
+            margin: 0; /* Remove default margin for h1 */
+            color: #1E90FF; /* Set text color */
+        }
+        #goBackLink {
+            position: absolute;
+            top: 10px; /* Adjust the top position as needed */
+            left: 10px; /* Adjust the left position as needed */
+            display: inline-block;
+            padding: 10px;
+            background-color: #4169E1; /* Green color, adjust as needed */
+            color: #fff; /* Text color */
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+                }
+
+        #goBackLink:hover {
+            background-color: #45a049; /* Darker green color on hover */
+        }
+        form {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #eee;
+            border-radius: 8px;
+            box-shadow: 0 0 24px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        /* Style for tooltips */
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        /* Style for the customer type dropdown */
+        
+        #customerType {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: none; /* Remove the border */
+            background-color: rgba(255, 255, 255, 0.4);
+
+        }
+        /* Style for the customer details section */
+        
+        .customer-details {
+            margin-bottom: 20px;
+            border: none; /* Remove the border */
+        }
+        
+        .customer-details label {
+            display: block;
+            margin-top: 10px;
+        }
+        
+        .customer-details input,
+        .customer-details select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: none; /* Remove the border */
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        /* Style for the product details section */
+        
+        .product-details label {
+            display: block;
+            margin-top: 10px;
+        }
+        
+        .product-details input,
+        .product-details textarea,
+        .product-details select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: none; /* Remove the border */
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        /* Style for the buttons */
+        #voucherCode {
+            width: 70%; /* Adjust the width of the input field as needed */
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        #verifyButton {
+            margin-left: 10px; /* Adjust the left margin as needed */
+            padding: 8px 15px; /* Adjust padding as needed for a friendly appearance */
+            background-color: #007bff; /* Blue color, adjust as needed */
+            color: #fff; /* Text color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #verifyButton:hover {
+            background-color: #0056b3; /* Darker blue color on hover */
+        }
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+            grid-column: span 2;
+        }
+        /* Style to initially hide the existing customer dropdown */
+        
+        #existingCustomerDetails {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+          <a id="goBackLink" href="dashboard.html">&#8592; Go Back</a>
+        <h1>Order Page</h1>
+    </header>
+
+    <section>
+        <form id="orderForm">
+
+            <!-- Customer Type Dropdown -->
+            <label for="customerType">Select Customer Type:</label>
+            <select id="customerType" name="customerType" onchange="toggleCustomerDetails()">
+                 <!-- Empty default option -->
+                    <option value="" disabled selected>Select Customer Type</option>
+                    <!-- Other options -->
+                 <option value="new">New Customer</option>
+                <option value="existing">Existing Customer</option>
+                
+            </select>
+
+            <!-- Customer Details Section (Hidden by default) -->
+            <div class="customer-details" id="newCustomerDetails">
+                <!-- Left Column -->
+                <div>
+                    <label for="customerId">Customer ID:</label>
+                    <input type="text" name="customerId" readonly>
+
+                    <label for="customerName">Customer Name:</label>
+                    <input type="text" name="customerName" required>
+
+                    <label for="customerPhone">Phone Number:</label>
+                    <input type="tel" name="customerPhone" required>
+
+                    <label for="customerEmail">Email:</label>
+                    <input type="email" name="customerEmail" required>
+                </div>
+
+                <!-- Right Column -->
+                <div>
+                    <label for="productName">Product Name:</label>
+                    <select id="productName" onchange="updateAmount()" required>
+                        <option value="product1">Smart Bulb CCTV Camera</option>
+                        <option value="product2">4G PTZ Solar Camera</option>
+                        <option value="product3">Smart Indoor CCTV Camera</option>
+                        <option value="product4">Solar Wireless/Rechargeable Camera</option>
+                        <option value="product5">Alarm Flash PTZ CCTV Camera</option>
+                        <option value="product6">Wifi Indoor/Outdoor Camera</option>
+                        <option value="product7">Mini CCTV Camera</option>
+                        <option value="product8">Dual Lens PTZ Wifi Camera</option>
+                        <!-- Add more options for other products -->
+                    </select>
+                    <label for="amountPerProduct">Amount per Product:</label>
+                    <input type="number" name="amountPerProduct" id="amountPerProduct" min="0" onchange="updateAmount()" required>
+                    
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" name="quantity" id="quantity" min="1" onchange="updateAmount()" required>
+
+               
+
+                </div>
+                <!-- Additional fields for the new form -->
+                
+            </div>
+
+
+            <!-- Existing Customer Dropdown (Hidden by default) -->
+            <div class="customer-details" id="existingCustomerDetails">
+                <label for="existingCustomer">Select Existing Customer:</label>
+                <select name="existingCustomer">
+                    <!-- Populate this dropdown dynamically with existing customers -->
+                    <option value="customer1">Customer 1</option>
+                    <option value="customer1">Customer 2</option>
+                    <option value="customer1">Customer 3</option>
+                </select>
+                <div>
+                    <label for="productName">Product Name:</label>
+                     <select id="productName" onchange="updateAmount()" required>
+                        <option value="product1">Smart Bulb CCTV Camera</option>
+                        <option value="product2">4G PTZ Solar Camera</option>
+                        <option value="product3">Smart Indoor CCTV Camera</option>
+                        <option value="product4">Solar Wireless/Rechargeable Camera</option>
+                        <option value="product5">Alarm Flash PTZ CCTV Camera</option>
+                        <option value="product6">Wifi Indoor/Outdoor Camera</option>
+                        <option value="product7">Mini CCTV Camera</option>
+                        <option value="product8">Dual Lens PTZ Wifi Camera</option>
+                        <!-- Add more options for other products -->
+                    </select>
+                     <label for="amountPerProduct">Amount per Product:</label>
+                     <input type="number" id="amountPerProduct" readonly>
+
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" name="quantity" min="1" required>
+                                       
+                </div>
+            </div>
+
+            <!-- Additional Product Details Section (Left Column) -->
+            <div class="product-details">
+                
+                <label for="deliveryFee">Delivery Fee:</label>
+                <input type="number" name="deliveryFee" min="0" required>
+
+                <!-- Label for Preferred Delivery Date -->
+                <label for="preferredDeliveryDate">Preferred Delivery Date:</label>
+
+                <!-- Input field for Preferred Delivery Date -->
+                <input type="date" id="preferredDeliveryDate" name="preferredDeliveryDate" required>
+
+                <label for="installationRequired">Installation Required:</label>
+                                <select name="installationRequired" id="installationRequired" onchange="toggleInstallationFee()">
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+
+                                <!-- Installation Fee Field -->
+                                <div id="installationFeeContainer" style="display: none;">
+                                    <label for="installationFee">Installation Fee:</label>
+                                    <input type="number" name="installationFee" min="0">
+                                </div>
+                <label for="state">State:</label>
+                <select name="state" required>
+                    <option value="Abia">Abia</option>
+                     <option value="Adamawa">Adamawa</option>
+                    <option value="Akwa Ibom">Akwa Ibom</option>
+                    <option value="Anambra">Anambra</option>
+                    <option value="Bauchi">Bauchi</option>
+                    <option value="Bayelsa">Bayelsa</option>
+                    <option value="Benue">Benue</option>
+                    <option value="Borno">Borno</option>
+                    <option value="Cross River">Cross River</option>
+                    <option value="Delta">Delta</option>
+                    <option value="Ebonyi">Ebonyi</option>
+                    <option value="Edo">Edo</option>
+                    <option value="Ekiti">Ekiti</option>
+                    <option value="Enugu">Enugu</option>
+                    <option value="Gombe">Gombe</option>
+                    <option value="Imo">Imo</option>
+                    <option value="Jigawa">Jigawa</option>
+                    <option value="Kaduna">Kaduna</option>
+                    <option value="Kano">Kano</option>
+                    <option value="Katsina">Katsina</option>
+                    <option value="Kebbi">Kebbi</option>
+                    <option value="Kogi">Kogi</option>
+                    <option value="Kwara">Kwara</option>
+                    <option value="Lagos">Lagos</option>
+                    <option value="Nasarawa">Nasarawa</option>
+                    <option value="Niger">Niger</option>
+                    <option value="Ogun">Ogun</option>
+                    <option value="Ondo">Ondo</option>
+                    <option value="Osun">Osun</option>
+                    <option value="Oyo">Oyo</option>
+                    <option value="Plateau">Plateau</option>
+                    <option value="Rivers">Rivers</option>
+                    <option value="Sokoto">Sokoto</option>
+                    <option value="Taraba">Taraba</option>
+                    <option value="Yobe">Yobe</option>
+                    <option value="Zamfara">Zamfara</option>
+                    <option value="FCT">FCT Abuja</option>
+                    
+                    <!-- Add more options for other states -->
+                </select>
+                <label for="deliveryAddress">Delivery Address:</label>
+                <textarea name="deliveryAddress" required></textarea>
+
+               <label for="voucherCode">Voucher/Coupon Code:</label>
+                <input type="text" name="voucherCode" id="voucherCode">
+                <button type="button" id="verifyButton" onclick="verifyVoucher()">Verify</button>
+
+                <label for="totalAmount">Total Amount:</label>
+                <input type="number" name="totalAmount" id="totalAmount" min="0" readonly>
+            </div>
+
+            <!-- Buttons Section -->
+            <div class="buttons">
+                <!-- Place Order Button -->
+                <button type="submit">Place Order</button>
+
+                <!-- Button to add another customer -->
+                <button type="button" onclick="addAnotherCustomer()">Add Another Customer</button>
+            </div>
+        </form>
+    </section>
+
+    <script>
+        function updateAmount() {
+            // Get the selected product from the dropdown
+            var selectedProduct = document.getElementById("productName").value;
+
+            // Simulate fetching the amount from a server or any data source
+            var amount;
+
+            // Switch case to set the amount based on the selected product
+            switch (selectedProduct) {
+                case "product1":
+                    amount = 10; // Replace with the actual amount for Product 1
+                    break;
+                case "product2":
+                    amount = 20; // Replace with the actual amount for Product 2
+                    break;
+                case "product3":
+                    amount = 40; // Replace with the actual amount for Product 2
+                    break;
+                case "product4":
+                    amount = 40; // Replace with the actual amount for Product 2
+                    break;
+                case "product5":
+                    amount = 40; // Replace with the actual amount for Product 2
+                    break;
+                case "product6":
+                    amount = 40; // Replace with the actual amount for Product 2
+                    break;
+                case "product7":
+                    amount = 40; // Replace with the actual amount for Product 2
+                    break;
+                case "product8":
+                    amount = 40; // Replace with the actual amount for Product 2
+                    break;
+                // Add more cases for other products
+                default:
+                    amount = 0; // Default amount if product not recognized
+
+                
+            }
+
+            // Update the "Amount per Product" field
+            document.getElementById("amountPerProduct").value = amount;
+             // Get values from inputs
+            var quantity = parseFloat(document.getElementById('quantity').value) || 0;
+            var amountPerProduct = parseFloat(document.getElementById('amountPerProduct').value) || 0;
+
+            // Calculate total amount
+            var totalAmount = quantity * amountPerProduct;
+
+            // Update the total amount input
+            document.getElementById('totalAmount').value = totalAmount.toFixed(2);
+        }
+        function toggleInstallationFee() {
+            var installationRequired = document.getElementById('installationRequired');
+            var installationFeeContainer = document.getElementById('installationFeeContainer');
+
+            if (installationRequired.value === 'yes') {
+                installationFeeContainer.style.display = 'block';
+            } else {
+                installationFeeContainer.style.display = 'none';
+            }
+        }
+        // Function to format the date
+        function formatDate(dateString) {
+            const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString(undefined, options);
+        }
+
+        // Assuming you have an array of existing customers with their details
+        const existingCustomers = [
+            { id: '1', name: 'John Doe', phone: '1234567890', email: 'john@example.com' },
+            { id: '2', name: 'Jane Doe', phone: '9876543210', email: 'jane@example.com' },
+            // Add more customer details as needed
+        ];
+
+        function updateExistingCustomerDetails() {
+            const existingCustomerDropdown = document.getElementById('existingCustomer');
+            const selectedCustomerId = existingCustomerDropdown.value;
+
+            // Find the selected customer in the array
+            const selectedCustomer = existingCustomers.find(customer => customer.id === selectedCustomerId);
+
+            if (selectedCustomer) {
+                // Update the customer details fields
+                document.getElementById('customerId').value = selectedCustomer.id;
+                document.getElementById('customerName').value = selectedCustomer.name;
+                document.getElementById('customerPhone').value = selectedCustomer.phone;
+                document.getElementById('customerEmail').value = selectedCustomer.email;
+            } else {
+                // Clear the customer details fields if no customer is selected
+                document.getElementById('customerId').value = '';
+                document.getElementById('customerName').value = '';
+                document.getElementById('customerPhone').value = '';
+                document.getElementById('customerEmail').value = '';
+            }
+        }
+
+        // Attach the updateExistingCustomerDetails function to the change event of the dropdown
+        document.getElementById('existingCustomer').addEventListener('change', updateExistingCustomerDetails);
+
+
+        // Fetch and populate the product dropdown (you can replace this with your actual products)
+        fetch('https://your-products-api-endpoint') // Replace with your actual API endpoint
+            .then(response => response.json())
+            .then(data => {
+                const productDropdown = document.querySelector('[name="productName"]');
+                data.products.forEach(product => {
+                    const option = document.createElement('option');
+                    option.value = product.name;
+                    option.textContent = product.name;
+                    productDropdown.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching products:', error));
+
+        function toggleCustomerDetails() {
+            const customerType = document.getElementById('customerType').value;
+            const newCustomerDetails = document.getElementById('newCustomerDetails');
+            const existingCustomerDetails = document.getElementById('existingCustomerDetails');
+
+            if (customerType === 'new') {
+                newCustomerDetails.style.display = 'grid';
+                existingCustomerDetails.style.display = 'none';
+                generateCustomerId(); // Generate ID when new customer form is displayed
+            } else {
+                newCustomerDetails.style.display = 'none';
+                existingCustomerDetails.style.display = 'block';
+            }
+                }
+        function verifyVoucher() {
+            const voucherCode = document.getElementById('voucherCode').value;
+
+            // Perform an AJAX request to your server to verify the voucher code
+            // You'll need to implement the server-side verification logic
+
+            // Example: Mocking a successful verification
+            // In a real scenario, you would make an AJAX request to your server
+            const isValid = true;
+
+            if (isValid) {
+                alert('Voucher code is valid!');
+                // Additional logic if the voucher code is valid
+            } else {
+                alert('Invalid voucher code. Please try again.');
+                // Additional logic if the voucher code is invalid
+            }
+        }
+        function generateCustomerId() {
+            // Logic to generate and fill the customer ID for the current form
+            const customerIdInput = document.querySelector('div#newCustomerDetails input[name="customerId"]');
+            const generatedCustomerId = 'C' + Math.floor(Math.random() * 1000);
+
+            // Fill the input field with the generated ID
+            customerIdInput.value = generatedCustomerId;
+        }
+
+        function addAnotherCustomer() {
+            // Clone the new customer details section without copying the value of customerId
+            const newCustomerDetails = document.getElementById('newCustomerDetails');
+            const clone = newCustomerDetails.cloneNode(true);
+
+            // Clear input values in the cloned section
+            clone.querySelectorAll('input, textarea, select').forEach(input => input.value = '');
+
+            // Update IDs to ensure uniqueness
+            const uniqueId = Date.now();
+            clone.id = 'newCustomerDetails' + uniqueId;
+            clone.querySelectorAll('[name]').forEach(el => {
+                el.name += uniqueId;
+            });
+
+            // Generate a new ID for the cloned section
+            generateCustomerId();
+
+            // Insert the cloned section above the buttons
+            document.getElementById('orderForm').insertBefore(clone, document.querySelector('.buttons'));
+        }
+    </script>
+
+</body>
+
+</html>
